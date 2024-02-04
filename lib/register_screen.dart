@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
                       labelText: 'Name',
                       prefixIcon: Icon(
                         Icons.person,
-                        color: Colors.green,
+                        color: Color.fromARGB(255, 125, 125, 125),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
@@ -70,7 +70,7 @@ class _RegisterState extends State<Register> {
                       labelText: 'Email',
                       prefixIcon: Icon(
                         Icons.email,
-                        color: Colors.lightBlue,
+                        color: Color.fromARGB(255, 125, 125, 125),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
@@ -88,12 +88,28 @@ class _RegisterState extends State<Register> {
                       labelText: 'Mobile',
                       prefixIcon: Icon(
                         Icons.phone,
-                        color: Colors.grey,
+                        color: Color.fromARGB(255, 125, 125, 125),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
                       ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Enter Address',
+                      labelText: 'Address',
+                      prefixIcon: Icon(
+                        Icons.location_on,
+                        color: Color.fromARGB(255, 125, 125, 125),
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
                     ),
                   ),
                 ),
