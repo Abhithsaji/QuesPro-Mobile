@@ -8,16 +8,44 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  List<String> district = [
+    "Thiruvananthapuram",
+    "Kollam",
+    "Pathanamthitta",
+    "Alappuzha",
+    "Kottayam",
+    "Idukki",
+    "Ernakulam",
+    "Thrissur",
+    "Palakkad",
+    "Malappuram",
+    "Kozhikode",
+    "Wayanad",
+    "Kannur",
+    "Kasaragod"
+  ];
+
+  String? selectedDistrict;
+  String? gender;
+  bool check = true;
+  bool checked = true;
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
-  Map userData = {};
-  final _formkey = GlobalKey<FormState>();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _placeController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confpasswordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   void register() {
     print('Name: ${_nameController.text}');
     print('Email: ${_emailController.text}');
     print('Contact: ${_contactController.text}');
+    print('Address: ${_addressController.text}');
+    print('Selected District: $selectedDistrict');
   }
 
   @override
@@ -30,7 +58,7 @@ class _RegisterState extends State<Register> {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Form(
-            key: _formkey,
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -50,10 +78,6 @@ class _RegisterState extends State<Register> {
                     decoration: const InputDecoration(
                       hintText: 'Enter Name',
                       labelText: 'Name',
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Color.fromARGB(255, 125, 125, 125),
-                      ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
@@ -68,10 +92,6 @@ class _RegisterState extends State<Register> {
                     decoration: const InputDecoration(
                       hintText: 'Enter Email',
                       labelText: 'Email',
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: Color.fromARGB(255, 125, 125, 125),
-                      ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
@@ -86,10 +106,6 @@ class _RegisterState extends State<Register> {
                     decoration: const InputDecoration(
                       hintText: 'Enter Mobile Number',
                       labelText: 'Mobile',
-                      prefixIcon: Icon(
-                        Icons.phone,
-                        color: Color.fromARGB(255, 125, 125, 125),
-                      ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
@@ -100,22 +116,104 @@ class _RegisterState extends State<Register> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: _addressController,
+                    maxLines: 2,
                     decoration: const InputDecoration(
                       hintText: 'Enter Address',
                       labelText: 'Address',
-                      prefixIcon: Icon(
-                        Icons.location_on,
-                        color: Color.fromARGB(255, 125, 125, 125),
-                      ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                      ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedDistrict,
+                    items: district.map((String district) {
+                      return DropdownMenuItem<String>(
+                        value: district,
+                        child: Text(district),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedDistrict = value!;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Select District',
+                      labelText: 'District',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _placeController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter Place',
+                      labelText: 'Place',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _passwordController,
+                    obscureText: check,
+                    decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                check = !check;
+                              });
+                            },
+                            child: Icon(check
+                                ? Icons.visibility_off
+                                : Icons.visibility)),
+                        fillColor: Colors.grey,
+                        hintText: "Password",
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5)))),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _confpasswordController,
+                    obscureText: checked,
+                    decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                checked = !checked;
+                              });
+                            },
+                            child: Icon(checked
+                                ? Icons.visibility_off
+                                : Icons.visibility)),
+                        fillColor: Colors.grey,
+                        hintText: " Confirm Password",
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5)))),
                   ),
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(108.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
@@ -127,7 +225,9 @@ class _RegisterState extends State<Register> {
                           backgroundColor: Colors.blue,
                         ),
                         onPressed: () {
-                          register();
+                          if (_formKey.currentState!.validate()) {
+                            register();
+                          }
                         },
                         child: const Text(
                           'Register',

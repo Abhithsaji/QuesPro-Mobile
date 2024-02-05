@@ -27,6 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/quespro-logo.png', // Path to your logo
+                width: 200, // Adjust size as needed
+                height: 200,
+              ),
+              const SizedBox(
+                height: 50,
+              ),
               const SizedBox(
                 height: 50,
               ),
